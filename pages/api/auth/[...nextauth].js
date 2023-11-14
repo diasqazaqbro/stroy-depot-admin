@@ -4,9 +4,7 @@ import NextAuth, { getServerSession } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 
 const adminEmails = [
-	process.env.EMAIL,
-	'adilovdarin1@gmail.com',
-	'nazarovabbas2@gmail.com'
+	process.env.EMAIL
 ]
 
 export const authOptions = {

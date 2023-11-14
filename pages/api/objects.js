@@ -1,5 +1,5 @@
 import { mongooseConnect } from "@/lib/mongoose";
-import { Settings } from "@/models/Settings";
+import { Objects } from "@/models/Objects";
 import { isAdminRequest } from "@/pages/api/auth/[...nextauth]";
 
 export default async function handle(req, res) {
@@ -8,15 +8,15 @@ export default async function handle(req, res) {
   await isAdminRequest(req, res);
 
   if (method === "GET") {
-    res.json(await Settings.find());
+    res.json(await Objects.find());
   }
 
   if (method === "PUT") {
     const {
-      number,
+     mainNumber, numberOne, numberTwo, numberThree
     } = req.body;
-    await Settings.updateOne({
-      number,
+    await Objects.updateOne({
+     mainNumber, numberOne, numberTwo, numberThree
     });
     res.json(true);
   }
