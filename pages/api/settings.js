@@ -1,11 +1,9 @@
 import { mongooseConnect } from "@/lib/mongoose";
 import { Settings } from "@/models/Settings";
-import { isAdminRequest } from "@/pages/api/auth/[...nextauth]";
 
 export default async function handle(req, res) {
   const { method } = req;
   await mongooseConnect();
-  await isAdminRequest(req, res);
 
   if (method === "GET") {
     res.json(await Settings.find());
