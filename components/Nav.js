@@ -42,7 +42,7 @@ export default function Nav({ show, setShowNav }) {
       </div>
       <nav className="nav">
         <div className="list">
-          <div class="nav-caption">Основные</div>
+          <div className="nav-caption">Основные</div>
           <Link
             href={"/"}
             className={pathname === "/" ? activeLink : inactiveLink}
@@ -93,7 +93,7 @@ export default function Nav({ show, setShowNav }) {
             </svg>
             Настройки
           </Link>
-          <div class="nav-caption">Изменение содержимого</div>
+          <div className="nav-caption">Изменение содержимого</div>
           <Link
             href={"/welcome"}
             className={
