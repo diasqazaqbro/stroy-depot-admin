@@ -7,16 +7,36 @@ export default function Settings({}) {
     axios.get("/api/settings").then((response) => {
       setNumber(response.data[0].number);
     });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=19")
+      .then((response) => {
+        setImagesOne(response.data.results.path);
+      });
   }, []);
 
   const [number, setNumber] = useState();
-
+  const [imagesOne, setImagesOne] = useState();
+  const [fileOne, setFileOne] = useState(null);
   async function saveProduct(ev) {
     ev.preventDefault();
     const data = {
-      number,
+      number
     };
     await axios.put("/api/settings", data);
+
+    const formDataOne = new FormData();
+    formDataOne.append("id", "19");
+    formDataOne.append("image", fileOne);
+
+    await axios.put(
+      "https://timkaqwerty.pythonanywhere.com/hds/img/",
+      formDataOne,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
   }
   return (
     <Layout>
@@ -29,6 +49,14 @@ export default function Settings({}) {
           value={number}
           onChange={(ev) => setNumber(ev.target.value)}
         />
+        <label>Логотип</label>
+        <input
+          type="file"
+          onChange={(event) => {
+            setFileOne(event.target.files[0]);
+          }}
+        /> 
+        <img src={imagesOne} style={{ width: '400px', height: '400px'}} />
         <button type="submit" className="btn-primary">
           Сохранить
         </button>
