@@ -10,9 +10,11 @@ export default function Welcome({}) {
       setWelcomeSupTitle(response.data[0].welcomeSupTitle);
       setWelcomeDesc(response.data[0].welcomeDesc);
     });
-    axios.get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=1").then((response) => {
-      setImages(response.data.results.path);
-    });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=1")
+      .then((response) => {
+        setImages(response.data.results.path);
+      });
   }, []);
 
   const [welcomeTitle, setWelcomeTitle] = useState();
@@ -22,7 +24,7 @@ export default function Welcome({}) {
   const [file, setFile] = useState();
   async function saveProduct(ev) {
     ev.preventDefault();
-    
+
     const data = {
       welcomeTitle,
       welcomeSupTitle,
@@ -30,17 +32,19 @@ export default function Welcome({}) {
     };
     await axios.put("/api/welcome", data);
     const formData = new FormData();
-    formData.append('id', '1'); 
-formData.append('image', file);
+    formData.append("id", "1");
+    formData.append("image", file);
 
-    await axios.put('https://timkaqwerty.pythonanywhere.com/hds/img/', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    
+    await axios.put(
+      "https://timkaqwerty.pythonanywhere.com/hds/img/",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
   }
-  
 
   return (
     <Layout>
@@ -84,12 +88,17 @@ formData.append('image', file);
             />
           </svg>
           <div>Add image</div>
-          <input type="file" className="hidden" onChange={(event) => {setFile(event.target.files[0])}} />
+          <input
+            type="file"
+            onChange={(event) => {
+              setFile(event.target.files[0]);
+            }}
+          />
         </label>
-        
-        <img src={images}/>
+
+        <img src={images} />
         <button type="submit" className="btn-primary">
-          Сохранить 
+          Сохранить
         </button>
       </form>
     </Layout>

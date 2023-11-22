@@ -110,14 +110,22 @@ export default function Nav({ show, setShowNav }) {
           >
             Успешно реализованных объектов
           </Link>
-          {/* <Link
+          <Link
+            href={"/projects"}
+            className={
+              pathname.includes("/projects") ? activeLink : inactiveLink
+            }
+          >
+            Последние проекты
+          </Link>
+          <Link
             href={"/services"}
             className={
               pathname.includes("/services") ? activeLink : inactiveLink
             }
           >
             Найти услуги
-          </Link> */}
+          </Link>
           <Link
             href={"/stages"}
             className={
