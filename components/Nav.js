@@ -142,6 +142,22 @@ export default function Nav({ show, setShowNav }) {
           >
             Часто задаваемые вопросы
           </Link>
+          <Link
+            href={"/price"}
+            className={
+              pathname.includes("/price") ? activeLink : inactiveLink
+            }
+          >
+            Раздел цены
+          </Link>
+          <Link
+            href={"/footer"}
+            className={
+              pathname.includes("/footer") ? activeLink : inactiveLink
+            }
+          >
+            Футер
+          </Link>
           <hr />
           <button onClick={logout} className={inactiveLink}>
             <svg
