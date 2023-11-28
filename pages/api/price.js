@@ -6,7 +6,7 @@ export default async function handle(req, res) {
   await mongooseConnect();
 
   if (method === "GET") {
-    res.setHeader("Access-Control-Allow-Origin", '*');
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
       "Access-Control-Allow-Methods",
       "GET, PUT, POST, DELETE, OPTIONS"
@@ -18,39 +18,31 @@ export default async function handle(req, res) {
   if (method === "PUT") {
     const {
       oneTitle,
+      oneSupTitle,
       oneDesc,
       twoTitle,
+      twoSupTitle,
       twoDesc,
       threeTitle,
+      threeSupTitle,
       threeDesc,
       fourTitle,
+      fourSupTitle,
       fourDesc,
-      fiveTitle,
-      fiveDesc,
-      sixTitle,
-      sixDesc,
-      sevenTitle,
-      sevenDesc,
-      eightTitle,
-      eightDesc,
     } = req.body;
     await Price.updateOne({
       oneTitle,
+      oneSupTitle,
       oneDesc,
       twoTitle,
+      twoSupTitle,
       twoDesc,
       threeTitle,
+      threeSupTitle,
       threeDesc,
       fourTitle,
+      fourSupTitle,
       fourDesc,
-      fiveTitle,
-      fiveDesc,
-      sixTitle,
-      sixDesc,
-      sevenTitle,
-      sevenDesc,
-      eightTitle,
-      eightDesc,
     });
     res.json(true);
   }

@@ -17,7 +17,7 @@ export default async function handle(req, res) {
 
   if (method === "PUT") {
     const {
-      adress,
+      address,
       workTime,
       holiday,
       clientNumber,
@@ -26,7 +26,7 @@ export default async function handle(req, res) {
       partnerEmail,
     } = req.body;
     await Footer.updateOne({
-      adress,
+      address,
       workTime,
       holiday,
       clientNumber,

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 export default function Footer({}) {
   useEffect(() => {
     axios.get("/api/footer").then((response) => {
-      setAdress(response.data[0].adress);
+      setAddress(response.data[0].address);
       setWorkTime(response.data[0].workTime);
       setHoliday(response.data[0].holiday);
       setClientNumber(response.data[0].clientNumber);
@@ -15,34 +15,24 @@ export default function Footer({}) {
     });
   }, []);
 
-  const [adress, setAdress] = useState();
+  const [address, setAddress] = useState();
   const [workTime, setWorkTime] = useState();
   const [holiday, setHoliday] = useState();
   const [clientNumber, setClientNumber] = useState();
   const [clientEmail, setClientEmail] = useState();
   const [partnerNumber, setPartnerNumber] = useState();
   const [partnerEmail, setPartnerEmail] = useState();
-  const [threeSupTitle, setThreeSupTitle] = useState();
-  const [threeDesc, setThreeDesc] = useState();
-  const [fourTitle, setFourTitle] = useState();
-  const [fourSupTitle, setFourSupTitle] = useState();
-  const [fourDesc, setFourDesc] = useState();
 
   async function saveProduct(ev) {
     ev.preventDefault();
     const data = {
-      adress,
+      address,
       workTime,
       holiday,
       clientNumber,
       clientEmail,
       partnerNumber,
       partnerEmail,
-      threeSupTitle,
-      threeDesc,
-      fourTitle,
-      fourSupTitle,
-      fourDesc,
     };
     await axios.put("/api/footer", data);
   }
@@ -54,8 +44,8 @@ export default function Footer({}) {
         <input
           type="text"
           placeholder="Введите ваш адрес"
-          value={adress}
-          onChange={(ev) => setAdress(ev.target.value)}
+          value={address}
+          onChange={(ev) => setAddress(ev.target.value)}
         />
 
         <label>Со сколько и до скольки вы работаете</label>
