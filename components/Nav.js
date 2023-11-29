@@ -159,6 +159,14 @@ export default function Nav({ show, setShowNav }) {
             Раздел цены
           </Link>
           <Link
+            href={"/portfolio"}
+            className={
+              pathname.includes("/portfolio") ? activeLink : inactiveLink
+            }
+          >
+            Раздел портфолио
+          </Link>
+          <Link
             href={"/footer"}
             className={
               pathname.includes("/footer") ? activeLink : inactiveLink
