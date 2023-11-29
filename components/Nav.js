@@ -135,6 +135,14 @@ export default function Nav({ show, setShowNav }) {
             Этапы работы
           </Link>
           <Link
+            href={"/partners"}
+            className={
+              pathname.includes("/partners") ? activeLink : inactiveLink
+            }
+          >
+            Партнеры
+          </Link>
+          <Link
             href={"/faq"}
             className={
               pathname.includes("/faq") ? activeLink : inactiveLink
