@@ -21,23 +21,25 @@ export default async function handle(req, res) {
   }
 
   if (method === "POST") {
-    const { title, supTitle, desc } = req.body;
+    const { title, supTitle, desc, imgId } = req.body;
     const portfolioDoc = await Portfolio.create({
       title,
       supTitle,
       desc,
+      imgId,
     });
     res.json(portfolioDoc);
   }
 
   if (method === "PUT") {
-    const { title, supTitle, desc } = req.body;
+    const { title, supTitle, desc, imgId } = req.body;
     await Portfolio.updateOne(
       { _id },
       {
         title,
         supTitle,
         desc,
+        imgId,
       }
     );
     res.json(true);

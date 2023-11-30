@@ -4,7 +4,7 @@ import Layout from "@/components/Layout";
 export default function NewPortfolio() {
   return (
     <Layout>
-      <h1>New Portfolio</h1>
+      <h1>Новое портфолио</h1>
       <PortfolioForm />
     </Layout>
   );

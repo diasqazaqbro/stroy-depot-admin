@@ -1,10 +1,16 @@
-import { model, models, Schema } from 'mongoose'
+import { model, models, Schema } from "mongoose";
 
-const PortfolioSchema = new Schema({
+const PortfolioSchema = new Schema(
+  {
     title: { type: String },
     supTitle: { type: String },
-	desc: { type: String },
-},{
-  timestamps: true,})
+    desc: { type: String },
+    imgId: { type: String },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-export const Portfolio = models?.Portfolio || model('Portfolio', PortfolioSchema)
+export const Portfolio =
+  models?.Portfolio || model("Portfolio", PortfolioSchema);

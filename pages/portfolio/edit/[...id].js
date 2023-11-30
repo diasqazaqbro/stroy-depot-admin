@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import ProductForm from "@/components/ProductForm";
+import PortfolioForm from "@/components/PortfolioForm";
 
 export default function EditProductPage() {
   const [productInfo, setProductInfo] = useState(null);
@@ -12,7 +12,7 @@ export default function EditProductPage() {
     if (!id) {
       return;
     }
-    axios.get('/api/products?id='+id).then(response => {
+    axios.get('/api/portfolio?id='+id).then(response => {
       setProductInfo(response.data);
     });
   }, [id]);
@@ -20,7 +20,7 @@ export default function EditProductPage() {
     <Layout>
       <h1>Edit product</h1>
       {productInfo && (
-        <ProductForm {...productInfo} />
+        <PortfolioForm {...productInfo} />
       )}
     </Layout>
   );
