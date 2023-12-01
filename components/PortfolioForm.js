@@ -2,28 +2,13 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 
-export default function ProductForm({
-  _id,
-  title: existingTitle,
-  supTitle: existingSupTitle,
-  desc: existingDesc,
-}) {
-  console.log(_id);
-  console.log(existingTitle);
-  console.log(existingSupTitle);
-  console.log(existingDesc);
-  const [title, setTitle] = useState(existingTitle || "");
-  const [supTitle, setSupTitle] = useState(existingSupTitle || "");
-  const [desc, setDesc] = useState(existingDesc || "");
+const apiUrl = "https://api.reddel.kz/api/get_portfolio_images";
+
+export default function ProductForm() {
+  const [title, setTitle] = useState();
+  const [supTitle, setSupTitle] = useState();
+  const [desc, setDesc] = useState();
   const [imgId, setImgId] = useState();
-  const [imagesOne, setImagesOne] = useState();
-  const [imagesTwo, setImagesTwo] = useState();
-  const [imagesThree, setImagesThree] = useState();
-  const [imagesFour, setImagesFour] = useState();
-  const [imagesFive, setImagesFive] = useState();
-  const [imagesSix, setImagesSix] = useState();
-  const [imagesSeven, setImagesSeven] = useState();
-  const [imagesEight, setImagesEight] = useState();
   const [fileOne, setFileOne] = useState(null);
   const [fileTwo, setFileTwo] = useState(null);
   const [fileThree, setFileThree] = useState(null);
@@ -35,74 +20,18 @@ export default function ProductForm({
 
   const [goToProducts, setGoToProducts] = useState(false);
   const router = useRouter();
-
   useEffect(() => {
-    let randomNum = Math.random();
+    let randomNum = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
     setImgId(randomNum);
-
-    const apiUrl = "https://api.reddel.kz/get_portfolio_images";
-    axios.get(`${apiUrl}/${imgId}1`).then((response) => {
-      if (response.status === 404) {
-        setImagesOne("");
-      } else {
-        setImagesOne(response.data.results.path);
-      }
-    });
-    axios.get(`${apiUrl}/${imgId}2`).then((response) => {
-      if (response.status === 404) {
-        setImagesTwo("");
-      } else {
-        setImagesTwo(response.data.results.path);
-      }
-    });
-    axios.get(`${apiUrl}/${imgId}3`).then((response) => {
-      if (response.status === 404) {
-        setImagesThree("");
-      } else {
-        setImagesThree(response.data.results.path);
-      }
-    });
-    axios.get(`${apiUrl}/${imgId}4`).then((response) => {
-      if (response.status === 404) {
-        setImagesFour("");
-      } else {
-        setImagesFour(response.data.results.path);
-      }
-    });
-    axios.get(`${apiUrl}/${imgId}5`).then((response) => {
-      if (response.status === 404) {
-        setImagesFive("");
-      } else {
-        setImagesFive(response.data.results.path);
-      }
-    });
-    axios.get(`${apiUrl}/${imgId}6`).then((response) => {
-      if (response.status === 404) {
-        setImagesSix("");
-      } else {
-        setImagesSix(response.data.results.path);
-      }
-    });
-    axios.get(`${apiUrl}/${imgId}7`).then((response) => {
-      if (response.status === 404) {
-        setImagesSeven("");
-      } else {
-        setImagesSeven(response.data.results.path);
-      }
-    });
-    axios.get(`${apiUrl}/${imgId}8`).then((response) => {
-      if (response.status === 404) {
-        setImagesEight("");
-      } else {
-        setImagesEight(response.data.results.path);
-      }
-    });
+    console.log(randomNum);
   }, []);
+
+
 
   async function saveProduct(ev) {
     ev.preventDefault();
 
-    const apiUrl = "https://api.reddel.kz/get_portfolio_images";
+  
 
     if (fileOne != null) {
       const formDataOne = new FormData();
@@ -206,13 +135,7 @@ export default function ProductForm({
       desc,
       imgId,
     };
-    if (_id) {
-      //update
-      await axios.put("/api/portfolio", {...data,_id});
-    } else {
-      //create
-      await axios.post("/api/portfolio", data);
-    }
+    await axios.post("/api/portfolio", data);
     setGoToProducts(true);
   }
 
@@ -220,18 +143,9 @@ export default function ProductForm({
     router.push("/portfolio");
   }
 
-  const deleteMode = async (id) => {
-    await axios.delete(
-      `https://api.reddel.kz/get_portfolio_images/${imgId}${id}`,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-  };
   return (
-    <form onSubmit={saveProduct}>
+<>
+<form onSubmit={saveProduct}>
       <label>Заголовок</label>
       <input
         type="text"
@@ -260,24 +174,13 @@ export default function ProductForm({
           padding: "25px",
         }}
       >
-        <div>
-          <button
-            onClick={() => {
-              deleteMode(1);
-            }}
-            type="submit"
-            className="btn-primary"
-          >
-            delete
-          </button>
-        </div>
         <input
           type="file"
           onChange={(event) => {
             setFileOne(event.target.files[0]);
           }}
         />
-        <img src={imagesOne} style={{ width: "400px", height: "400px" }} />
+      
       </div>
       <label>Остальные фотки</label>
       <div
@@ -287,24 +190,13 @@ export default function ProductForm({
           padding: "25px",
         }}
       >
-        <div>
-          <button
-            onClick={() => {
-              deleteMode(2);
-            }}
-            type="submit"
-            className="btn-primary"
-          >
-            delete
-          </button>
-        </div>
         <input
           type="file"
           onChange={(event) => {
             setFileTwo(event.target.files[0]);
           }}
         />
-        <img src={imagesTwo} style={{ width: "400px", height: "400px" }} />
+      
       </div>
       <div
         style={{
@@ -313,24 +205,13 @@ export default function ProductForm({
           padding: "25px",
         }}
       >
-        <div>
-          <button
-            onClick={() => {
-              deleteMode(3);
-            }}
-            type="submit"
-            className="btn-primary"
-          >
-            delete
-          </button>
-        </div>
         <input
           type="file"
           onChange={(event) => {
             setFileThree(event.target.files[0]);
           }}
         />
-        <img src={imagesThree} style={{ width: "400px", height: "400px" }} />
+      
       </div>
       <div
         style={{
@@ -339,24 +220,13 @@ export default function ProductForm({
           padding: "25px",
         }}
       >
-        <div>
-          <button
-            onClick={() => {
-              deleteMode(4);
-            }}
-            type="submit"
-            className="btn-primary"
-          >
-            delete
-          </button>
-        </div>
         <input
           type="file"
           onChange={(event) => {
             setFileFour(event.target.files[0]);
           }}
         />
-        <img src={imagesFour} style={{ width: "400px", height: "400px" }} />
+      
       </div>
       <div
         style={{
@@ -365,24 +235,13 @@ export default function ProductForm({
           padding: "25px",
         }}
       >
-        <div>
-          <button
-            onClick={() => {
-              deleteMode(5);
-            }}
-            type="submit"
-            className="btn-primary"
-          >
-            delete
-          </button>
-        </div>
         <input
           type="file"
           onChange={(event) => {
             setFileFive(event.target.files[0]);
           }}
         />
-        <img src={imagesFive} style={{ width: "400px", height: "400px" }} />
+      
       </div>
       <div
         style={{
@@ -391,24 +250,13 @@ export default function ProductForm({
           padding: "25px",
         }}
       >
-        <div>
-          <button
-            onClick={() => {
-              deleteMode(6);
-            }}
-            type="submit"
-            className="btn-primary"
-          >
-            delete
-          </button>
-        </div>
         <input
           type="file"
           onChange={(event) => {
             setFileSix(event.target.files[0]);
           }}
         />
-        <img src={imagesSix} style={{ width: "400px", height: "400px" }} />
+      
       </div>
       <div
         style={{
@@ -417,24 +265,13 @@ export default function ProductForm({
           padding: "25px",
         }}
       >
-        <div>
-          <button
-            onClick={() => {
-              deleteMode(7);
-            }}
-            type="submit"
-            className="btn-primary"
-          >
-            delete
-          </button>
-        </div>
         <input
           type="file"
           onChange={(event) => {
             setFileSeven(event.target.files[0]);
           }}
         />
-        <img src={imagesSeven} style={{ width: "400px", height: "400px" }} />
+      
       </div>
       <div
         style={{
@@ -443,29 +280,19 @@ export default function ProductForm({
           padding: "25px",
         }}
       >
-        <div>
-          <button
-            onClick={() => {
-              deleteMode(8);
-            }}
-            type="submit"
-            className="btn-primary"
-          >
-            delete
-          </button>
-        </div>
         <input
           type="file"
           onChange={(event) => {
             setFileEight(event.target.files[0]);
           }}
         />
-        <img src={imagesEight} style={{ width: "400px", height: "400px" }} />
+      
       </div>
-
+          
       <button type="submit" className="btn-primary">
         Save
       </button>
     </form>
+    </>
   );
 }
