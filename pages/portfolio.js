@@ -26,6 +26,7 @@ export default function Portfolio() {
             <tr key={item._id}>
               <td>{item.title}</td>
               <td>{item.supTitle}</td>
+              <td>{item.type}</td>
               <td>
                 <Link className="btn-red" href={'/portfolio/delete/'+item._id}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">

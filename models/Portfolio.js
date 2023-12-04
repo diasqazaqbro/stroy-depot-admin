@@ -6,6 +6,7 @@ const PortfolioSchema = new Schema(
     supTitle: { type: String },
     desc: { type: String },
     imgId: { type: String },
+    construction: {type: String}
   },
   {
     timestamps: true,

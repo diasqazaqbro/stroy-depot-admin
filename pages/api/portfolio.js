@@ -12,37 +12,19 @@ export default async function handle(req, res) {
       "GET, PUT, POST, DELETE, OPTIONS"
     );
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
-    if (req.query?.id) {
-      res.json(await Portfolio.findOne({ _id: req.query.id }));
-    } else {
-      res.json(await Portfolio.find());
-    }
+    res.json(await Portfolio.find());
   }
 
   if (method === "POST") {
-    const { title, supTitle, desc, imgId } = req.body;
+    const { title, supTitle, desc, imgId, construction } = req.body;
     const portfolioDoc = await Portfolio.create({
       title,
       supTitle,
       desc,
       imgId,
+      construction,
     });
     res.json(portfolioDoc);
-  }
-
-  if (method === "PUT") {
-    const { title, supTitle, desc, imgId } = req.body;
-    await Portfolio.updateOne(
-      { _id },
-      {
-        title,
-        supTitle,
-        desc,
-        imgId,
-      }
-    );
-    res.json(true);
   }
 
   if (method === "DELETE") {

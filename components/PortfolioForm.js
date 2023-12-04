@@ -9,6 +9,7 @@ export default function ProductForm() {
   const [supTitle, setSupTitle] = useState();
   const [desc, setDesc] = useState();
   const [imgId, setImgId] = useState();
+  const [construction, setConstruction] = useState('architecture');
   const [fileOne, setFileOne] = useState(null);
   const [fileTwo, setFileTwo] = useState(null);
   const [fileThree, setFileThree] = useState(null);
@@ -20,18 +21,21 @@ export default function ProductForm() {
 
   const [goToProducts, setGoToProducts] = useState(false);
   const router = useRouter();
+
+  const handleCheckboxChange = (value) => {
+    setConstruction(value === construction ? null : value);
+  };
+
+  console.log(construction);
+
   useEffect(() => {
     let randomNum = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
     setImgId(randomNum);
     console.log(randomNum);
   }, []);
 
-
-
   async function saveProduct(ev) {
     ev.preventDefault();
-
-  
 
     if (fileOne != null) {
       const formDataOne = new FormData();
@@ -134,6 +138,8 @@ export default function ProductForm() {
       supTitle,
       desc,
       imgId,
+      construction
+
     };
     await axios.post("/api/portfolio", data);
     setGoToProducts(true);
@@ -144,155 +150,168 @@ export default function ProductForm() {
   }
 
   return (
-<>
-<form onSubmit={saveProduct}>
-      <label>Заголовок</label>
-      <input
-        type="text"
-        placeholder="Заголовок"
-        value={title}
-        onChange={(ev) => setTitle(ev.target.value)}
-      />
-      <label>Под заголовок</label>
-      <input
-        type="text"
-        placeholder="Под заголовок"
-        value={supTitle}
-        onChange={(ev) => setSupTitle(ev.target.value)}
-      />
-      <label>Описание</label>
-      <textarea
-        placeholder="Описание"
-        value={desc}
-        onChange={(ev) => setDesc(ev.target.value)}
-      />
-      <label>Главная фотка</label>
-      <div
-        style={{
-          border: "2px solid black",
-          marginTop: "20px",
-          padding: "25px",
-        }}
-      >
+    <>
+      <form onSubmit={saveProduct}>
+        <label>Заголовок</label>
         <input
-          type="file"
-          onChange={(event) => {
-            setFileOne(event.target.files[0]);
-          }}
+          type="text"
+          placeholder="Заголовок"
+          value={title}
+          onChange={(ev) => setTitle(ev.target.value)}
         />
-      
-      </div>
-      <label>Остальные фотки</label>
-      <div
-        style={{
-          border: "2px solid black",
-          marginTop: "20px",
-          padding: "25px",
-        }}
-      >
+        <label>Под заголовок</label>
         <input
-          type="file"
-          onChange={(event) => {
-            setFileTwo(event.target.files[0]);
-          }}
+          type="text"
+          placeholder="Под заголовок"
+          value={supTitle}
+          onChange={(ev) => setSupTitle(ev.target.value)}
         />
-      
-      </div>
-      <div
-        style={{
-          border: "2px solid black",
-          marginTop: "20px",
-          padding: "25px",
-        }}
-      >
-        <input
-          type="file"
-          onChange={(event) => {
-            setFileThree(event.target.files[0]);
-          }}
+        <label>Описание</label>
+        <textarea
+          placeholder="Описание"
+          value={desc}
+          onChange={(ev) => setDesc(ev.target.value)}
         />
-      
-      </div>
-      <div
-        style={{
-          border: "2px solid black",
-          marginTop: "20px",
-          padding: "25px",
-        }}
-      >
-        <input
-          type="file"
-          onChange={(event) => {
-            setFileFour(event.target.files[0]);
+        <label>Тип</label>
+        <div className="flex items-center space-x-4">
+          <input
+            type="checkbox"
+            checked={construction === "architecture"}
+            onChange={() => handleCheckboxChange("architecture")}
+            className="form-checkbox h-5 w-5 text-green-500"
+          />
+          <label htmlFor="architecture" className="ml-2">
+            Архитектура
+          </label>
+          <input
+            type="checkbox"
+            checked={construction === "design"}
+            onChange={() => handleCheckboxChange("design")}
+            className="form-checkbox h-5 w-5 text-blue-500"
+          />
+          <label htmlFor="design" className="ml-2">
+            Дизайн
+          </label>
+        </div>
+        <label>Главная фотка</label>
+        <div
+          style={{
+            border: "2px solid black",
+            marginTop: "20px",
+            padding: "25px",
           }}
-        />
-      
-      </div>
-      <div
-        style={{
-          border: "2px solid black",
-          marginTop: "20px",
-          padding: "25px",
-        }}
-      >
-        <input
-          type="file"
-          onChange={(event) => {
-            setFileFive(event.target.files[0]);
+        >
+          <input
+            type="file"
+            onChange={(event) => {
+              setFileOne(event.target.files[0]);
+            }}
+          />
+        </div>
+        <label>Остальные фотки</label>
+        <div
+          style={{
+            border: "2px solid black",
+            marginTop: "20px",
+            padding: "25px",
           }}
-        />
-      
-      </div>
-      <div
-        style={{
-          border: "2px solid black",
-          marginTop: "20px",
-          padding: "25px",
-        }}
-      >
-        <input
-          type="file"
-          onChange={(event) => {
-            setFileSix(event.target.files[0]);
+        >
+          <input
+            type="file"
+            onChange={(event) => {
+              setFileTwo(event.target.files[0]);
+            }}
+          />
+        </div>
+        <div
+          style={{
+            border: "2px solid black",
+            marginTop: "20px",
+            padding: "25px",
           }}
-        />
-      
-      </div>
-      <div
-        style={{
-          border: "2px solid black",
-          marginTop: "20px",
-          padding: "25px",
-        }}
-      >
-        <input
-          type="file"
-          onChange={(event) => {
-            setFileSeven(event.target.files[0]);
+        >
+          <input
+            type="file"
+            onChange={(event) => {
+              setFileThree(event.target.files[0]);
+            }}
+          />
+        </div>
+        <div
+          style={{
+            border: "2px solid black",
+            marginTop: "20px",
+            padding: "25px",
           }}
-        />
-      
-      </div>
-      <div
-        style={{
-          border: "2px solid black",
-          marginTop: "20px",
-          padding: "25px",
-        }}
-      >
-        <input
-          type="file"
-          onChange={(event) => {
-            setFileEight(event.target.files[0]);
+        >
+          <input
+            type="file"
+            onChange={(event) => {
+              setFileFour(event.target.files[0]);
+            }}
+          />
+        </div>
+        <div
+          style={{
+            border: "2px solid black",
+            marginTop: "20px",
+            padding: "25px",
           }}
-        />
-      
-      </div>
-          
-      <button type="submit" className="btn-primary">
-        Save
-      </button>
-    </form>
+        >
+          <input
+            type="file"
+            onChange={(event) => {
+              setFileFive(event.target.files[0]);
+            }}
+          />
+        </div>
+        <div
+          style={{
+            border: "2px solid black",
+            marginTop: "20px",
+            padding: "25px",
+          }}
+        >
+          <input
+            type="file"
+            onChange={(event) => {
+              setFileSix(event.target.files[0]);
+            }}
+          />
+        </div>
+        <div
+          style={{
+            border: "2px solid black",
+            marginTop: "20px",
+            padding: "25px",
+          }}
+        >
+          <input
+            type="file"
+            onChange={(event) => {
+              setFileSeven(event.target.files[0]);
+            }}
+          />
+        </div>
+        <div
+          style={{
+            border: "2px solid black",
+            marginTop: "20px",
+            padding: "25px",
+          }}
+        >
+          <input
+            type="file"
+            onChange={(event) => {
+              setFileEight(event.target.files[0]);
+            }}
+          />
+        </div>
+
+        <button type="submit" className="btn-primary">
+          Save
+        </button>
+      </form>
     </>
   );
 }
