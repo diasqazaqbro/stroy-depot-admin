@@ -9,7 +9,7 @@ export default function ProductForm() {
   const [supTitle, setSupTitle] = useState();
   const [desc, setDesc] = useState();
   const [imgId, setImgId] = useState();
-  const [construction, setConstruction] = useState('architecture');
+  const [construction, setConstruction] = useState("architecture");
   const [fileOne, setFileOne] = useState(null);
   const [fileTwo, setFileTwo] = useState(null);
   const [fileThree, setFileThree] = useState(null);
@@ -36,6 +36,19 @@ export default function ProductForm() {
 
   async function saveProduct(ev) {
     ev.preventDefault();
+    const data = {
+      title,
+      supTitle,
+      desc,
+      imgId,
+      construction,
+    };
+    await axios.post("/api/portfolio", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    setGoToProducts(true);
 
     if (fileOne != null) {
       const formDataOne = new FormData();
@@ -132,17 +145,6 @@ export default function ProductForm() {
         },
       });
     }
-
-    const data = {
-      title,
-      supTitle,
-      desc,
-      imgId,
-      construction
-
-    };
-    await axios.post("/api/portfolio", data);
-    setGoToProducts(true);
   }
 
   if (goToProducts) {

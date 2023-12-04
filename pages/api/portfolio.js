@@ -24,7 +24,7 @@ export default async function handle(req, res) {
       imgId,
       construction,
     });
-    res.json(portfolioDoc);
+    res.json(portfolioDoc); 
   }
 
   if (method === "DELETE") {

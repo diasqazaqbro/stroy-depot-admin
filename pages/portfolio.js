@@ -8,7 +8,6 @@ export default function Portfolio() {
   useEffect(() => {
     axios.get('/api/portfolio').then(response => {
       setPortfolio(response.data);
-      console.log(response.data);
     });
   }, []);
   return (
@@ -19,6 +18,7 @@ export default function Portfolio() {
           <tr>
             <td>Заголовок</td>
             <td>Подзаголовок</td>
+            <td>Тип</td>
           </tr>
         </thead>
         <tbody>
@@ -26,7 +26,7 @@ export default function Portfolio() {
             <tr key={item._id}>
               <td>{item.title}</td>
               <td>{item.supTitle}</td>
-              <td>{item.type}</td>
+              <td>{item.construction}</td>
               <td>
                 <Link className="btn-red" href={'/portfolio/delete/'+item._id}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
