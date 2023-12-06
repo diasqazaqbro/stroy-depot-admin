@@ -13,6 +13,14 @@ export default function Projects({}) {
       setATitleOne(response.data[0].aTitleOne);
       setATitleTwo(response.data[0].aTitleTwo);
       setATitleThree(response.data[0].aTitleThree);
+      setDesignLinkOne(response.data[0].designLinkOne);
+      setDesignLinkTwo(response.data[0].designLinkTwo);
+      setDesignLinkThree(response.data[0].designLinkThree);
+      setDesignLinkFour(response.data[0].designLinkFour);
+      setDesignLinkFive(response.data[0].designLinkFive);
+      setALinkOne(response.data[0].aLinkOne);
+      setALinkTwo(response.data[0].aLinkTwo);
+      setALinkThree(response.data[0].aLinkThree);
     });
     axios
       .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=3")
@@ -63,6 +71,14 @@ export default function Projects({}) {
   const [aTitleOne, setATitleOne] = useState();
   const [aTitleTwo, setATitleTwo] = useState();
   const [aTitleThree, setATitleThree] = useState();
+  const [designLinkOne, setDesignLinkOne] = useState();
+  const [designLinkTwo, setDesignLinkTwo] = useState();
+  const [designLinkThree, setDesignLinkThree] = useState();
+  const [designLinkFour, setDesignLinkFour] = useState();
+  const [designLinkFive, setDesignLinkFive] = useState();
+  const [aLinkOne, setALinkOne] = useState();
+  const [aLinkTwo, setALinkTwo] = useState();
+  const [aLinkThree, setALinkThree] = useState();
   const [imagesOne, setImagesOne] = useState();
   const [imagesTwo, setImagesTwo] = useState();
   const [imagesThree, setImagesThree] = useState();
@@ -90,6 +106,14 @@ export default function Projects({}) {
       aTitleOne,
       aTitleTwo,
       aTitleThree,
+      designLinkOne,
+      designLinkTwo,
+      designLinkThree,
+      designLinkFour,
+      designLinkFive,
+      aLinkOne,
+      aLinkTwo,
+      aLinkThree,
     };
     await axios.put("/api/projects", data);
 
@@ -216,6 +240,12 @@ export default function Projects({}) {
           onChange={(ev) => setDesignTitleOne(ev.target.value)}
         />
         <input
+          type="text"
+          placeholder="Ссылка на Дизайн"
+          value={designLinkOne}
+          onChange={(ev) => setDesignLinkOne(ev.target.value)}
+        />
+        <input
           type="file"
           onChange={(event) => {
             setFileOne(event.target.files[0]);
@@ -229,6 +259,12 @@ export default function Projects({}) {
           placeholder="Заголовок Дизайна"
           value={designTitleTwo}
           onChange={(ev) => setDesignTitleTwo(ev.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Ссылка на Дизайн"
+          value={designLinkTwo}
+          onChange={(ev) => setDesignLinkTwo(ev.target.value)}
         />
         <input
           type="file"
@@ -246,6 +282,12 @@ export default function Projects({}) {
           onChange={(ev) => setDesignTitleThree(ev.target.value)}
         />
         <input
+          type="text"
+          placeholder="Ссылка на Дизайн"
+          value={designLinkThree}
+          onChange={(ev) => setDesignLinkThree(ev.target.value)}
+        />
+        <input
           type="file"
           onChange={(event) => {
             setFileThree(event.target.files[0]);
@@ -261,6 +303,12 @@ export default function Projects({}) {
           onChange={(ev) => setDesignTitleFour(ev.target.value)}
         />
         <input
+          type="text"
+          placeholder="Ссылка на Дизайн"
+          value={designLinkFour}
+          onChange={(ev) => setDesignLinkFour(ev.target.value)}
+        />
+        <input
           type="file"
           onChange={(event) => {
             setFileFour(event.target.files[0]);
@@ -274,6 +322,12 @@ export default function Projects({}) {
           placeholder="Заголовок Дизайна"
           value={designTitleFive}
           onChange={(ev) => setDesignTitleFive(ev.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Ссылка на Дизайн"
+          value={designLinkFive}
+          onChange={(ev) => setDesignLinkFive(ev.target.value)}
         />
         <input
           type="file"
@@ -292,6 +346,12 @@ export default function Projects({}) {
           onChange={(ev) => setATitleOne(ev.target.value)}
         />
         <input
+          type="text"
+          placeholder="Ссылка Архитектуры"
+          value={aLinkOne}
+          onChange={(ev) => setALinkOne(ev.target.value)}
+        />
+        <input
           type="file"
           onChange={(event) => {
             setFileSix(event.target.files[0]);
@@ -307,6 +367,12 @@ export default function Projects({}) {
           onChange={(ev) => setATitleTwo(ev.target.value)}
         />
         <input
+          type="text"
+          placeholder="Ссылка Архитектуры"
+          value={aLinkTwo}
+          onChange={(ev) => setALinkTwo(ev.target.value)}
+        />
+        <input
           type="file"
           onChange={(event) => {
             setFileSeven(event.target.files[0]);
@@ -320,6 +386,12 @@ export default function Projects({}) {
           placeholder="Заголовок Архитектуры"
           value={aTitleThree}
           onChange={(ev) => setATitleThree(ev.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Ссылка Архитектуры"
+          value={aLinkThree}
+          onChange={(ev) => setALinkThree(ev.target.value)}
         />
         <input
           type="file"

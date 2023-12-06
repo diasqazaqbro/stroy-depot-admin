@@ -25,6 +25,14 @@ export default async function handle(req, res) {
       aTitleOne,
       aTitleTwo,
       aTitleThree,
+      designLinkOne,
+      designLinkTwo,
+      designLinkThree,
+      designLinkFour,
+      designLinkFive,
+      aLinkOne,
+      aLinkTwo,
+      aLinkThree,
     } = req.body;
     await Projects.updateOne({
       designTitleOne,
@@ -35,6 +43,14 @@ export default async function handle(req, res) {
       aTitleOne,
       aTitleTwo,
       aTitleThree,
+      designLinkOne,
+      designLinkTwo,
+      designLinkThree,
+      designLinkFour,
+      designLinkFive,
+      aLinkOne,
+      aLinkTwo,
+      aLinkThree,
     });
     res.json(true);
   }
