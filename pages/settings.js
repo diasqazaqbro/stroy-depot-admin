@@ -18,7 +18,6 @@ export default function Settings({}) {
   const [imagesOne, setImagesOne] = useState();
   const [fileOne, setFileOne] = useState(null);
   async function saveProduct(ev) {
-    ev.preventDefault();
     const data = {
       number
     };

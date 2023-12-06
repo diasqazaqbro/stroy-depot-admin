@@ -21,7 +21,6 @@ export default function FAQ({}) {
   const [threeTitle, setThreeTitle] = useState();
   const [threeSupTitle, setThreeSupTitle] = useState();
   async function saveProduct(ev) {
-    ev.preventDefault();
     const data = {
       oneTitle,
       oneSupTitle,

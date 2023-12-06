@@ -23,7 +23,6 @@ export default function Welcome({}) {
   const [images, setImages] = useState();
   const [file, setFile] = useState();
   async function saveProduct(ev) {
-    ev.preventDefault();
 
     const data = {
       welcomeTitle,

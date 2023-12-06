@@ -64,7 +64,6 @@ export default function Partners({}) {
   const [f6, setF6] = useState();
   const [f7, setF7] = useState();
   async function saveProduct(ev) {
-    ev.preventDefault();
     const data = {
       accent,
       title,

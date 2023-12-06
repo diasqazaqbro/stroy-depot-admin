@@ -97,7 +97,6 @@ export default function Stages({}) {
   const [fileSeven, setFileSeven] = useState(null);
   const [fileEight, setFileEight] = useState(null);
   async function saveProduct(ev) {
-    ev.preventDefault();
     const data = {
       oneTitle,
       oneDesc,

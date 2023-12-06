@@ -24,7 +24,6 @@ export default function Objects({}) {
   const [images, setImages] = useState();
   const [file, setFile] = useState();
   async function saveProduct(ev) {
-    ev.preventDefault();
     const data = {
       mainNumber,
       numberOne,

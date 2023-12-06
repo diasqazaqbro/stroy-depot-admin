@@ -34,7 +34,6 @@ export default function Price({}) {
   const [fourDesc, setFourDesc] = useState();
 
   async function saveProduct(ev) {
-    ev.preventDefault();
     const data = {
       oneTitle,
       oneSupTitle,

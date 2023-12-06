@@ -24,7 +24,6 @@ export default function Footer({}) {
   const [partnerEmail, setPartnerEmail] = useState();
 
   async function saveProduct(ev) {
-    ev.preventDefault();
     const data = {
       address,
       workTime,
