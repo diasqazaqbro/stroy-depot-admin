@@ -50,10 +50,10 @@ export default function ProductForm({_id}) {
 
     if (fileOne != null) {
       const formDataOne = new FormData();
-      formDataOne.append("id", `${imgId}1`);
+      formDataTwo.append("id", `${imgId}1`);
       formDataOne.append("image", fileOne);
 
-      await axios.put(`${apiUrl}/${imgId}1`, formDataOne, {
+      await axios.post(`${apiUrl}/${imgId}1`, formDataOne, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -65,7 +65,7 @@ export default function ProductForm({_id}) {
       formDataTwo.append("id", `${imgId}2`);
       formDataTwo.append("image", fileTwo);
 
-      await axios.put(`${apiUrl}/${imgId}2`, formDataTwo, {
+      await axios.post(`${apiUrl}/${imgId}2`, formDataTwo, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -77,7 +77,7 @@ export default function ProductForm({_id}) {
       formDataThree.append("id", `${imgId}3`);
       formDataThree.append("image", fileThree);
 
-      await axios.put(`${apiUrl}/${imgId}3`, formDataThree, {
+      await axios.post(`${apiUrl}/${imgId}3`, formDataThree, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -89,7 +89,7 @@ export default function ProductForm({_id}) {
       formDataFour.append("id", `${imgId}4`);
       formDataFour.append("image", fileFour);
 
-      await axios.put(`${apiUrl}/${imgId}4`, formDataFour, {
+      await axios.post(`${apiUrl}/${imgId}4`, formDataFour, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -101,7 +101,7 @@ export default function ProductForm({_id}) {
       formDataFive.append("id", `${imgId}5`);
       formDataFive.append("image", fileFive);
 
-      await axios.put(`${apiUrl}/${imgId}5`, formDataFive, {
+      await axios.post(`${apiUrl}/${imgId}5`, formDataFive, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -113,7 +113,7 @@ export default function ProductForm({_id}) {
       formDataSix.append("id", `${imgId}6`);
       formDataSix.append("image", fileSix);
 
-      await axios.put(`${apiUrl}/${imgId}6`, formDataSix, {
+      await axios.post(`${apiUrl}/${imgId}6`, formDataSix, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -125,7 +125,7 @@ export default function ProductForm({_id}) {
       formDataSeven.append("id", `${imgId}7`);
       formDataSeven.append("image", fileSeven);
 
-      await axios.put(`${apiUrl}/${imgId}7`, formDataSeven, {
+      await axios.post(`${apiUrl}/${imgId}7`, formDataSeven, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -137,7 +137,7 @@ export default function ProductForm({_id}) {
       formDataEight.append("id", `${imgId}8`);
       formDataEight.append("image", fileEight);
 
-      await axios.put(`${apiUrl}/${imgId}8`, formDataEight, {
+      await axios.post(`${apiUrl}/${imgId}8`, formDataEight, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -153,7 +153,7 @@ export default function ProductForm({_id}) {
     <>
       <form onSubmit={saveProduct}>
         <label>Заголовок</label>
-        <input
+        <inpost
           type="text"
           placeholder="Заголовок"
           value={title}
