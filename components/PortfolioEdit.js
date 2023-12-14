@@ -153,7 +153,7 @@ export default function ProductForm({_id}) {
     <>
       <form onSubmit={saveProduct}>
         <label>Заголовок</label>
-        <inpost
+        <input
           type="text"
           placeholder="Заголовок"
           value={title}
