@@ -23,7 +23,9 @@ export default function Objects({}) {
   const [numberThree, setNumberThree] = useState();
   const [images, setImages] = useState();
   const [file, setFile] = useState();
+  const [showAlert, setShowAlert] = useState(false);
   async function saveProduct(ev) {
+    ev.preventDefault()
     const data = {
       mainNumber,
       numberOne,
@@ -45,9 +47,31 @@ export default function Objects({}) {
         },
       }
     );
+    axios.get("/api/objects").then((response) => {
+      setMainNumber(response.data[0].mainNumber);
+      setNumberOne(response.data[0].numberOne);
+      setNumberTwo(response.data[0].numberTwo);
+      setNumberThree(response.data[0].numberThree);
+    });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=2")
+      .then((response) => {
+        setImages(response.data.results.path);
+      });
+    setShowAlert(true);
+
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   return (
     <Layout>
+      {showAlert && (
+        <div className="bg-green-500 text-white px-4 py-2 mt-4 rounded">
+          Сохранение прошло успешно!
+        </div>
+      )}
       <h1 className="my-4">Настройка успешно реализованных объектов</h1>
       <img src="/helpers/h2.png" style={{ width: "100%" }} />
       <form onSubmit={saveProduct}>
@@ -92,7 +116,7 @@ export default function Objects({}) {
         />
         </label>
         <img src={images} />
-        <button type="submit" className="btn-primary">
+        <button type="submit" className="btn-primary my-3">
           Сохранить
         </button>
         

@@ -32,8 +32,9 @@ export default function Services({}) {
   const [fourTitle, setFourTitle] = useState();
   const [fourSupTitle, setFourSupTitle] = useState();
   const [fourDesc, setFourDesc] = useState();
-
+  const [showAlert, setShowAlert] = useState(false);
   async function saveProduct(ev) {
+    ev.preventDefault()
     const data = {
       oneTitle,
       oneSupTitle,
@@ -49,9 +50,34 @@ export default function Services({}) {
       fourDesc,
     };
     await axios.put("/api/services", data);
+    axios.get("/api/services").then((response) => {
+      setOneTitle(response.data[0].oneTitle);
+      setOneSupTitle(response.data[0].oneSupTitle);
+      setOneDesc(response.data[0].oneDesc);
+      setTwoTitle(response.data[0].twoTitle);
+      setTwoSupTitle(response.data[0].twoSupTitle);
+      setTwoDesc(response.data[0].twoDesc);
+      setThreeTitle(response.data[0].threeTitle);
+      setThreeSupTitle(response.data[0].threeSupTitle);
+      setThreeDesc(response.data[0].threeDesc);
+      setFourTitle(response.data[0].fourTitle);
+      setFourSupTitle(response.data[0].fourSupTitle);
+      setFourDesc(response.data[0].fourDesc);
+    });
+    setShowAlert(true);
+
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   return (
     <Layout>
+      {showAlert && (
+        <div className="bg-green-500 text-white px-4 py-2 mt-4 rounded">
+          Сохранение прошло успешно!
+        </div>
+      )}
       <h1 className="my-4">Настройка услуг</h1>
       <img src="/helpers/h3.png" style={{ width: "100%" }} />
       <form onSubmit={saveProduct}>
@@ -148,7 +174,7 @@ export default function Services({}) {
           onChange={(ev) => setFourDesc(ev.target.value)}
         />
 
-        <button type="submit" className="btn-primary">
+        <button type="submit" className="btn-primary my-3">
           Сохранить
         </button>
       </form>

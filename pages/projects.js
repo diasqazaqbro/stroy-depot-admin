@@ -95,7 +95,10 @@ export default function Projects({}) {
   const [fileSix, setFileSix] = useState(null);
   const [fileSeven, setFileSeven] = useState(null);
   const [fileEight, setFileEight] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
+
   async function saveProduct(ev) {
+    ev.preventDefault()
     const data = {
       designTitleOne,
       designTitleTwo,
@@ -222,10 +225,85 @@ export default function Projects({}) {
         },
       }
     );
+
+    axios.get("/api/projects").then((response) => {
+      setDesignTitleOne(response.data[0].designTitleOne);
+      setDesignTitleTwo(response.data[0].designTitleTwo);
+      setDesignTitleThree(response.data[0].designTitleThree);
+      setDesignTitleFour(response.data[0].designTitleFour);
+      setDesignTitleFive(response.data[0].designTitleFive);
+      setATitleOne(response.data[0].aTitleOne);
+      setATitleTwo(response.data[0].aTitleTwo);
+      setATitleThree(response.data[0].aTitleThree);
+      setDesignLinkOne(response.data[0].designLinkOne);
+      setDesignLinkTwo(response.data[0].designLinkTwo);
+      setDesignLinkThree(response.data[0].designLinkThree);
+      setDesignLinkFour(response.data[0].designLinkFour);
+      setDesignLinkFive(response.data[0].designLinkFive);
+      setALinkOne(response.data[0].aLinkOne);
+      setALinkTwo(response.data[0].aLinkTwo);
+      setALinkThree(response.data[0].aLinkThree);
+    });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=3")
+      .then((response) => {
+        setImagesOne(response.data.results.path);
+      });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=4")
+      .then((response) => {
+        setImagesTwo(response.data.results.path);
+      });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=5")
+      .then((response) => {
+        setImagesThree(response.data.results.path);
+      });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=6")
+      .then((response) => {
+        setImagesFour(response.data.results.path);
+      });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=7")
+      .then((response) => {
+        setImagesFive(response.data.results.path);
+      });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=8")
+      .then((response) => {
+        setImagesSix(response.data.results.path);
+      });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=9")
+      .then((response) => {
+        setImagesSeven(response.data.results.path);
+      });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=10")
+      .then((response) => {
+        setImagesEight(response.data.results.path);
+      });
+      setShowAlert(true);
+
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     
   }
   return (
     <Layout>
+      {showAlert && (
+        <div className="bg-green-500 text-white px-4 py-2 mt-4 rounded">
+          Сохранение прошло успешно!
+        </div>
+      )}
+      {showAlert && (
+        <div className="bg-green-500 text-white px-4 py-2 mt-4 rounded">
+          Сохранение прошло успешно!
+        </div>
+      )}
       <h1 className="my-4">Настройка раздела последние проекты</h1>
       {/* <img src="/helpers/h4.png" style={{ width: "100%" }} /> */}
       <form onSubmit={saveProduct}>
@@ -399,7 +477,7 @@ export default function Projects({}) {
           }}
         />
         <img src={imagesEight} style={{ width: '400px', height: '400px'}} />
-        <button type="submit" className="btn-primary">
+        <button type="submit" className="btn-primary my-3">
           Сохранить
         </button>
       </form>

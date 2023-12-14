@@ -20,7 +20,9 @@ export default function FAQ({}) {
   const [twoSupTitle, setTwoSupTitle] = useState();
   const [threeTitle, setThreeTitle] = useState();
   const [threeSupTitle, setThreeSupTitle] = useState();
+  const [showAlert, setShowAlert] = useState(false);
   async function saveProduct(ev) {
+    ev.preventDefault()
     const data = {
       oneTitle,
       oneSupTitle,
@@ -30,9 +32,28 @@ export default function FAQ({}) {
       threeSupTitle,
     };
     await axios.put("/api/faq", data);
+    axios.get("/api/faq").then((response) => {
+      setOneTitle(response.data[0].oneTitle);
+      setOneSupTitle(response.data[0].oneSupTitle);
+      setTwoTitle(response.data[0].twoTitle);
+      setTwoSupTitle(response.data[0].twoSupTitle);
+      setThreeTitle(response.data[0].threeTitle);
+      setThreeSupTitle(response.data[0].threeSupTitle);
+    });
+    setShowAlert(true);
+
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   return (
     <Layout>
+      {showAlert && (
+        <div className="bg-green-500 text-white px-4 py-2 mt-4 rounded">
+          Сохранение прошло успешно!
+        </div>
+      )}
       <h1 className="my-4">Настройка содержимого сайта</h1>
       <img src="/helpers/h5.png" style={{ width: "100%" }} />
       <form onSubmit={saveProduct}>
@@ -83,7 +104,7 @@ export default function FAQ({}) {
           value={threeSupTitle}
           onChange={(ev) => setThreeSupTitle(ev.target.value)}
         />
-        <button type="submit" className="btn-primary">
+        <button type="submit" className="btn-primary my-3">
           Сохранить
         </button>
       </form>

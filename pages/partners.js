@@ -63,7 +63,9 @@ export default function Partners({}) {
   const [f5, setF5] = useState();
   const [f6, setF6] = useState();
   const [f7, setF7] = useState();
+  const [showAlert, setShowAlert] = useState(false);
   async function saveProduct(ev) {
+    ev.preventDefault()
     const data = {
       accent,
       title,
@@ -163,9 +165,60 @@ export default function Partners({}) {
         },
       }
     );
+    axios.get("/api/partners").then((response) => {
+      setAccent(response.data[0].accent);
+      setTitle(response.data[0].title);
+      setDesc(response.data[0].desc);
+    });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=20")
+      .then((response) => {
+        setI1(response.data.results.path);
+      });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=21")
+      .then((response) => {
+        setI2(response.data.results.path);
+      });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=22")
+      .then((response) => {
+        setI3(response.data.results.path);
+      });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=23")
+      .then((response) => {
+        setI4(response.data.results.path);
+      });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=24")
+      .then((response) => {
+        setI5(response.data.results.path);
+      });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=25")
+      .then((response) => {
+        setI6(response.data.results.path);
+      });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=26")
+      .then((response) => {
+        setI7(response.data.results.path);
+      });
+    setShowAlert(true);
+
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   return (
     <Layout>
+      {showAlert && (
+        <div className="bg-green-500 text-white px-4 py-2 mt-4 rounded">
+          Сохранение прошло успешно!
+        </div>
+      )}
       <h1 className="my-4">Настройка услуг</h1>
       <form onSubmit={saveProduct}>
         <label>Акцентное слово</label>
@@ -241,7 +294,7 @@ export default function Partners({}) {
           }}
         />
         <img src={i7} style={{ width: '400px', height: '400px'}} />
-        <button type="submit" className="btn-primary">
+        <button type="submit" className="btn-primary my-3">
           Сохранить
         </button>
       </form>

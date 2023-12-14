@@ -96,7 +96,9 @@ export default function Stages({}) {
   const [fileSix, setFileSix] = useState(null);
   const [fileSeven, setFileSeven] = useState(null);
   const [fileEight, setFileEight] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
   async function saveProduct(ev) {
+    ev.preventDefault()
     const data = {
       oneTitle,
       oneDesc,
@@ -223,9 +225,78 @@ export default function Stages({}) {
         },
       }
     );
+    axios.get("/api/stages").then((response) => {
+      setOneTitle(response.data[0].oneTitle);
+      setOneDesc(response.data[0].oneDesc);
+      setTwoTitle(response.data[0].twoTitle);
+      setTwoDesc(response.data[0].twoDesc);
+      setThreeTitle(response.data[0].threeTitle);
+      setThreeDesc(response.data[0].threeDesc);
+      setFourTitle(response.data[0].fourTitle);
+      setFourDesc(response.data[0].fourDesc);
+      setFiveTitle(response.data[0].fiveTitle);
+      setFiveDesc(response.data[0].fiveDesc);
+      setSixTitle(response.data[0].sixTitle);
+      setSixDesc(response.data[0].sixDesc);
+      setSevenTitle(response.data[0].sevenTitle);
+      setSevenDesc(response.data[0].sevenDesc);
+      setEightTitle(response.data[0].eightTitle);
+      setEightDesc(response.data[0].eightDesc);
+    });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=11")
+      .then((response) => {
+        setImagesOne(response.data.results.path);
+      });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=12")
+      .then((response) => {
+        setImagesTwo(response.data.results.path);
+      });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=13")
+      .then((response) => {
+        setImagesThree(response.data.results.path);
+      });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=14")
+      .then((response) => {
+        setImagesFour(response.data.results.path);
+      });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=15")
+      .then((response) => {
+        setImagesFive(response.data.results.path);
+      });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=16")
+      .then((response) => {
+        setImagesSix(response.data.results.path);
+      });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=17")
+      .then((response) => {
+        setImagesSeven(response.data.results.path);
+      });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=18")
+      .then((response) => {
+        setImagesEight(response.data.results.path);
+      });
+    setShowAlert(true);
+
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   return (
     <Layout>
+      {showAlert && (
+        <div className="bg-green-500 text-white px-4 py-2 mt-4 rounded">
+          Сохранение прошло успешно!
+        </div>
+      )}
       <h1 className="my-4">Настройка этапы работ</h1>
       <img src="/helpers/h4.png" style={{ width: "100%" }} />
       <form onSubmit={saveProduct}>
@@ -441,7 +512,7 @@ export default function Stages({}) {
           }}
         />
         <img src={imagesEight} style={{ width: "400px", height: "400px" }} />
-        <button type="submit" className="btn-primary">
+        <button type="submit" className="btn-primary my-3">
           Сохранить
         </button>
       </form>

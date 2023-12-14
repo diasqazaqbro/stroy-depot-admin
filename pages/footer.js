@@ -22,8 +22,10 @@ export default function Footer({}) {
   const [clientEmail, setClientEmail] = useState();
   const [partnerNumber, setPartnerNumber] = useState();
   const [partnerEmail, setPartnerEmail] = useState();
+  const [showAlert, setShowAlert] = useState(false);
 
   async function saveProduct(ev) {
+    ev.preventDefault()
     const data = {
       address,
       workTime,
@@ -34,9 +36,29 @@ export default function Footer({}) {
       partnerEmail,
     };
     await axios.put("/api/footer", data);
+    axios.get("/api/footer").then((response) => {
+      setAddress(response.data[0].address);
+      setWorkTime(response.data[0].workTime);
+      setHoliday(response.data[0].holiday);
+      setClientNumber(response.data[0].clientNumber);
+      setClientEmail(response.data[0].clientEmail);
+      setPartnerNumber(response.data[0].partnerNumber);
+      setPartnerEmail(response.data[0].partnerEmail);
+    });
+    setShowAlert(true);
+
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   return (
     <Layout>
+      {showAlert && (
+        <div className="bg-green-500 text-white px-4 py-2 mt-4 rounded">
+          Сохранение прошло успешно!
+        </div>
+      )}
       <h1 className="my-4">Настройка футера</h1>
       <form onSubmit={saveProduct}>
         <label>Введите ваш адрес</label>
@@ -92,7 +114,7 @@ export default function Footer({}) {
           value={partnerEmail}
           onChange={(ev) => setPartnerEmail(ev.target.value)}
         />
-        <button type="submit" className="btn-primary">
+        <button type="submit" className="btn-primary my-3">
           Сохранить
         </button>
       </form>

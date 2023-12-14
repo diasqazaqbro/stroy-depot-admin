@@ -22,8 +22,9 @@ export default function Welcome({}) {
   const [welcomeDesc, setWelcomeDesc] = useState();
   const [images, setImages] = useState();
   const [file, setFile] = useState();
+  const [showAlert, setShowAlert] = useState(false);
   async function saveProduct(ev) {
-
+    ev.preventDefault()
     const data = {
       welcomeTitle,
       welcomeSupTitle,
@@ -43,10 +44,31 @@ export default function Welcome({}) {
         },
       }
     );
+    axios.get("/api/welcome").then((response) => {
+      setWelcomeTitle(response.data[0].welcomeTitle);
+      setWelcomeSupTitle(response.data[0].welcomeSupTitle);
+      setWelcomeDesc(response.data[0].welcomeDesc);
+    });
+    axios
+      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=1")
+      .then((response) => {
+        setImages(response.data.results.path);
+      });
+    setShowAlert(true);
+
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   return (
     <Layout>
+      {showAlert && (
+        <div className="bg-green-500 text-white px-4 py-2 mt-4 rounded">
+          Сохранение прошло успешно!
+        </div>
+      )}
       <h1 className="my-4">Настройка страницы приветствия</h1>
       <img src="/helpers/h1.png" style={{ width: "100%" }} />
       <form onSubmit={saveProduct}>
@@ -81,7 +103,7 @@ export default function Welcome({}) {
           />
 
         <img src={images} />
-        <button type="submit" className="btn-primary">
+        <button type="submit" className="btn-primary my-3">
           Сохранить
         </button>
       </form>
