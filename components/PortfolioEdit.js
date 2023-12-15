@@ -50,7 +50,7 @@ export default function ProductForm({_id}) {
 
     if (fileOne != null) {
       const formDataOne = new FormData();
-      formDataTwo.append("id", `${imgId}1`);
+      formDataOne.append("id", `${imgId}1`);
       formDataOne.append("image", fileOne);
 
       await axios.post(`${apiUrl}/${imgId}1`, formDataOne, {
