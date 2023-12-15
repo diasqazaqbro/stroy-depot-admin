@@ -14,12 +14,22 @@ export default function ProductForm({_id}) {
       setImgId(response.data.imgId)
       setConstruction(response.data.construction)
     });
+   
   }, [_id])
+  
   const [title, setTitle] = useState('');
   const [supTitle, setSupTitle] = useState('');
   const [desc, setDesc] = useState('');
   const [imgId, setImgId] = useState('');
   const [construction, setConstruction] = useState( "architecture");
+  const [imageOne, setImageOne] = useState('');
+  const [imageTwo, setImageTwo] = useState('');
+  const [imageThree, setImageThree] = useState('');
+  const [imageFour, setImageFour] = useState('');
+  const [imageFive, setImageFive] = useState('');
+  const [imageSix, setImageSix] = useState('');
+  const [imageSeven, setImageSeven] = useState('');
+  const [imageEight, setImageEight] = useState('');
   const [fileOne, setFileOne] = useState(null);
   const [fileTwo, setFileTwo] = useState(null);
   const [fileThree, setFileThree] = useState(null);
@@ -35,7 +45,32 @@ export default function ProductForm({_id}) {
   const handleCheckboxChange = (value) => {
     setConstruction(value === construction ? null : value);
   };
-
+  useEffect(() => {
+    axios.get(`${apiUrl}/${imgId}1`).then((response) => {
+      setImageOne(`https://api.reddel.kz/${response.data.image}`);
+    });
+    axios.get(`${apiUrl}/${imgId}2`).then((response) => {
+      setImageTwo(`https://api.reddel.kz/${response.data.image}`);
+    });
+    axios.get(`${apiUrl}/${imgId}3`).then((response) => {
+      setImageThree(`https://api.reddel.kz/${response.data.image}`);
+    });
+    axios.get(`${apiUrl}/${imgId}4`).then((response) => {
+      setImageFour(`https://api.reddel.kz/${response.data.image}`);
+    });
+    axios.get(`${apiUrl}/${imgId}5`).then((response) => {
+      setImageFive(`https://api.reddel.kz/${response.data.image}`);
+    });
+    axios.get(`${apiUrl}/${imgId}6`).then((response) => {
+      setImageSix(`https://api.reddel.kz/${response.data.image}`);
+    });
+    axios.get(`${apiUrl}/${imgId}7`).then((response) => {
+      setImageSeven(`https://api.reddel.kz/${response.data.image}`);
+    });
+    axios.get(`${apiUrl}/${imgId}8`).then((response) => {
+      setImageEight(`https://api.reddel.kz/${response.data.image}`);
+    });
+  }, [imgId])
   async function saveProduct(ev) {
     ev.preventDefault();
     const data = {
@@ -201,6 +236,7 @@ export default function ProductForm({_id}) {
             padding: "25px",
           }}
         >
+          <img src={imageOne} style={{ width: '400px', height: '400px'}} />
           <input
             type="file"
             onChange={(event) => {
@@ -216,6 +252,7 @@ export default function ProductForm({_id}) {
             padding: "25px",
           }}
         >
+          <img src={imageTwo} style={{ width: '400px', height: '400px'}} />
           <input
             type="file"
             onChange={(event) => {
@@ -230,6 +267,7 @@ export default function ProductForm({_id}) {
             padding: "25px",
           }}
         >
+          <img src={imageThree} style={{ width: '400px', height: '400px'}} />
           <input
             type="file"
             onChange={(event) => {
@@ -244,6 +282,7 @@ export default function ProductForm({_id}) {
             padding: "25px",
           }}
         >
+          <img src={imageFour} style={{ width: '400px', height: '400px'}} />
           <input
             type="file"
             onChange={(event) => {
@@ -258,6 +297,7 @@ export default function ProductForm({_id}) {
             padding: "25px",
           }}
         >
+          <img src={imageFive} style={{ width: '400px', height: '400px'}} />
           <input
             type="file"
             onChange={(event) => {
@@ -272,6 +312,7 @@ export default function ProductForm({_id}) {
             padding: "25px",
           }}
         >
+          <img src={imageSix} style={{ width: '400px', height: '400px'}} />
           <input
             type="file"
             onChange={(event) => {
@@ -286,6 +327,7 @@ export default function ProductForm({_id}) {
             padding: "25px",
           }}
         >
+          <img src={imageSeven} style={{ width: '400px', height: '400px'}} />
           <input
             type="file"
             onChange={(event) => {
@@ -300,6 +342,7 @@ export default function ProductForm({_id}) {
             padding: "25px",
           }}
         >
+          <img src={imageEight} style={{ width: '400px', height: '400px'}} />
           <input
             type="file"
             onChange={(event) => {
@@ -308,7 +351,7 @@ export default function ProductForm({_id}) {
           />
         </div>
 
-        <button type="submit" className="btn-primary">
+        <button type="submit" className="btn-primary my-2">
           Save
         </button>
       </form>

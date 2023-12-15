@@ -18,7 +18,7 @@ export default function ProductForm() {
   const [fileSix, setFileSix] = useState(null);
   const [fileSeven, setFileSeven] = useState(null);
   const [fileEight, setFileEight] = useState(null);
-
+  const [showAlert, setShowAlert] = useState(false);
   const [goToProducts, setGoToProducts] = useState(false);
   const router = useRouter();
 
@@ -36,114 +36,133 @@ export default function ProductForm() {
 
   async function saveProduct(ev) {
     ev.preventDefault();
-    const data = {
-      title,
-      supTitle,
-      desc,
-      imgId,
-      construction,
-    };
-    await axios.post("/api/portfolio", data, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    setGoToProducts(true);
-
-    if (fileOne != null) {
-      const formDataOne = new FormData();
-      formDataOne.append("id", `${imgId}1`);
-      formDataOne.append("image", fileOne);
-
-      await axios.post(`${apiUrl}/${imgId}1`, formDataOne, {
+    if (
+      fileOne != null &&
+      fileTwo != null &&
+      fileThree != null &&
+      fileFour != null &&
+      fileFive != null &&
+      fileSix != null &&
+      fileSeven != null &&
+      fileEight != null
+    ) {
+      
+      const data = {
+        title,
+        supTitle,
+        desc,
+        imgId,
+        construction,
+      };
+      await axios.post("/api/portfolio", data, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json",
         },
       });
-    }
+      setGoToProducts(true);
 
-    if (fileTwo != null) {
-      const formDataTwo = new FormData();
-      formDataTwo.append("id", `${imgId}2`);
-      formDataTwo.append("image", fileTwo);
+      if (fileOne != null) {
+        const formDataOne = new FormData();
+        formDataOne.append("id", `${imgId}1`);
+        formDataOne.append("image", fileOne);
 
-      await axios.post(`${apiUrl}/${imgId}2`, formDataTwo, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-    }
+        await axios.post(`${apiUrl}/${imgId}1`, formDataOne, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+      }
 
-    if (fileThree != null) {
-      const formDataThree = new FormData();
-      formDataThree.append("id", `${imgId}3`);
-      formDataThree.append("image", fileThree);
+      if (fileTwo != null) {
+        const formDataTwo = new FormData();
+        formDataTwo.append("id", `${imgId}2`);
+        formDataTwo.append("image", fileTwo);
 
-      await axios.post(`${apiUrl}/${imgId}3`, formDataThree, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-    }
+        await axios.post(`${apiUrl}/${imgId}2`, formDataTwo, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+      }
 
-    if (fileFour != null) {
-      const formDataFour = new FormData();
-      formDataFour.append("id", `${imgId}4`);
-      formDataFour.append("image", fileFour);
+      if (fileThree != null) {
+        const formDataThree = new FormData();
+        formDataThree.append("id", `${imgId}3`);
+        formDataThree.append("image", fileThree);
 
-      await axios.post(`${apiUrl}/${imgId}4`, formDataFour, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-    }
+        await axios.post(`${apiUrl}/${imgId}3`, formDataThree, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+      }
 
-    if (fileFive != null) {
-      const formDataFive = new FormData();
-      formDataFive.append("id", `${imgId}5`);
-      formDataFive.append("image", fileFive);
+      if (fileFour != null) {
+        const formDataFour = new FormData();
+        formDataFour.append("id", `${imgId}4`);
+        formDataFour.append("image", fileFour);
 
-      await axios.post(`${apiUrl}/${imgId}5`, formDataFive, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-    }
+        await axios.post(`${apiUrl}/${imgId}4`, formDataFour, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+      }
 
-    if (fileSix != null) {
-      const formDataSix = new FormData();
-      formDataSix.append("id", `${imgId}6`);
-      formDataSix.append("image", fileSix);
+      if (fileFive != null) {
+        const formDataFive = new FormData();
+        formDataFive.append("id", `${imgId}5`);
+        formDataFive.append("image", fileFive);
 
-      await axios.post(`${apiUrl}/${imgId}6`, formDataSix, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-    }
+        await axios.post(`${apiUrl}/${imgId}5`, formDataFive, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+      }
 
-    if (fileSeven != null) {
-      const formDataSeven = new FormData();
-      formDataSeven.append("id", `${imgId}7`);
-      formDataSeven.append("image", fileSeven);
+      if (fileSix != null) {
+        const formDataSix = new FormData();
+        formDataSix.append("id", `${imgId}6`);
+        formDataSix.append("image", fileSix);
 
-      await axios.post(`${apiUrl}/${imgId}7`, formDataSeven, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-    }
+        await axios.post(`${apiUrl}/${imgId}6`, formDataSix, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+      }
 
-    if (fileEight != null) {
-      const formDataEight = new FormData();
-      formDataEight.append("id", `${imgId}8`);
-      formDataEight.append("image", fileEight);
+      if (fileSeven != null) {
+        const formDataSeven = new FormData();
+        formDataSeven.append("id", `${imgId}7`);
+        formDataSeven.append("image", fileSeven);
 
-      await axios.post(`${apiUrl}/${imgId}8`, formDataEight, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+        await axios.post(`${apiUrl}/${imgId}7`, formDataSeven, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+      }
+
+      if (fileEight != null) {
+        const formDataEight = new FormData();
+        formDataEight.append("id", `${imgId}8`);
+        formDataEight.append("image", fileEight);
+
+        await axios.post(`${apiUrl}/${imgId}8`, formDataEight, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+      }
+    } else {
+      setShowAlert(true);
+
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
 
@@ -153,6 +172,11 @@ export default function ProductForm() {
 
   return (
     <>
+    {showAlert && (
+        <div className="bg-red-500 text-white px-4 py-2 mt-4 rounded">
+          Ты не загрузил 8 фоток!!!
+        </div>
+      )}
       <form onSubmit={saveProduct}>
         <label>Заголовок</label>
         <input
