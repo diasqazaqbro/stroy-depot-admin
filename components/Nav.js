@@ -36,10 +36,7 @@ export default function Nav({ show, setShowNav }) {
           />
         </svg>
       </button>
-      <div className="py-5 text-center">
-        <img src={session?.user?.image} className="mx-auto w-24 rounded-full" />
-        <div className="about">{session?.user?.name}</div>
-      </div>
+      
       <nav className="nav">
         <div className="list">
           <div className="nav-caption">Основные</div>

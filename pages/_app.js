@@ -4,10 +4,12 @@ import { SessionProvider } from 'next-auth/react'
 
 export default function App({
 	Component,
-	pageProps: { session, ...pageProps },
+	pageProps: { ...pageProps },
 }) {
+console.log('Environment Variable:', process.env.HUDOS_LOGIN);
+
 	return (
-		<SessionProvider session={session}>
+		<SessionProvider >
 			<Component {...pageProps} />
 		</SessionProvider>
 	)

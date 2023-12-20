@@ -5,21 +5,12 @@ import { useState } from 'react'
 
 export default function Layout({ children }) {
 	const [showNav, setShowNav] = useState(false)
-	const { data: session } = useSession()
-	if (!session) {
-		return (
-			<div className='bg-bgGray w-screen h-screen flex items-center'>
-				<div className='text-center w-full'>
-					<button
-						onClick={() => signIn('google')}
-						className='bg-white p-2 px-4 rounded-lg'
-					>
-						Login with Google
-					</button>
-				</div>
-			</div>
-		)
-	}
+	const { data: session } = useSession({
+        required: true,
+        onUnauthenticated() {
+            redirect('/api/auth/signin?callbackUrl=/client')
+        }
+    })
 
 	return (
 		<div className='bg-bgGray min-h-screen '>
