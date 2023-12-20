@@ -297,6 +297,7 @@ export default function Partners({}) {
         <button type="submit" className="btn-primary my-3">
           Сохранить
         </button>
+        
       </form>
     </Layout>
   );
