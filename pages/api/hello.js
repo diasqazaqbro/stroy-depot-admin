@@ -1,11 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
+import { setCorsHeaders } from "@/lib/cors";
+
 export default function handler(req, res) {
-	res.setHeader("Access-Control-Allow-Origin", "https://hudos.kz"); // Specify your actual domain
-	res.setHeader(
-	  "Access-Control-Allow-Methods",
-	  "GET, PUT, POST, DELETE, OPTIONS"
-	);
-	res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+	setCorsHeaders(req, res, () => {});
 	res.status(200).json({ name: 'Dias' })
 }

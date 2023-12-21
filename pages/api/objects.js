@@ -1,3 +1,4 @@
+import { setCorsHeaders } from "@/lib/cors";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Objects } from "@/models/Objects";
 
@@ -6,21 +7,18 @@ export default async function handle(req, res) {
   await mongooseConnect();
 
   if (method === "GET") {
-    res.setHeader("Access-Control-Allow-Origin", "https://hudos.kz"); // Specify your actual domain
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, PUT, POST, DELETE, OPTIONS"
-  );
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    setCorsHeaders(req, res, () => {});
+
     res.json(await Objects.find());
   }
 
   if (method === "PUT") {
-    const {
-     mainNumber, numberOne, numberTwo, numberThree
-    } = req.body;
+    const { mainNumber, numberOne, numberTwo, numberThree } = req.body;
     await Objects.updateOne({
-     mainNumber, numberOne, numberTwo, numberThree
+      mainNumber,
+      numberOne,
+      numberTwo,
+      numberThree,
     });
     res.json(true);
   }
