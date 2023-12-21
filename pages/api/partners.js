@@ -6,7 +6,7 @@ export default async function handle(req, res) {
   await mongooseConnect();
 
   if (method === "GET") {
-    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Origin", "https://hudos.kz"); // Specify your actual domain
     res.setHeader(
       "Access-Control-Allow-Methods",
       "GET, PUT, POST, DELETE, OPTIONS"
