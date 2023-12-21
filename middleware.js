@@ -1,3 +1,9 @@
+import NextAuthMiddleware from 'next-auth/middleware';
+import { setCorsHeaders } from './lib/cors';
 
+export default async function handle(req, res) {
+  setCorsHeaders(req, res, () => {});
 
-export { default } from 'next-auth/middleware'
+  await NextAuthMiddleware(req, res);
+
+}
