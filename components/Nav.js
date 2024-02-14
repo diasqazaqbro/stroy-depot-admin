@@ -92,84 +92,12 @@ export default function Nav({ show, setShowNav }) {
           </Link>
           <div className="nav-caption">Изменение содержимого</div>
           <Link
-            href={"/welcome"}
+            href={"/products"}
             className={
-              pathname.includes("/welcome") ? activeLink : inactiveLink
+              pathname.includes("/products") ? activeLink : inactiveLink
             }
           >
-            Cтраница приветствия
-          </Link>
-          <Link
-            href={"/objects"}
-            className={
-              pathname.includes("/objects") ? activeLink : inactiveLink
-            }
-          >
-            Успешно реализованных объектов
-          </Link>
-          <Link
-            href={"/projects"}
-            className={
-              pathname.includes("/projects") ? activeLink : inactiveLink
-            }
-          >
-            Последние проекты
-          </Link>
-          <Link
-            href={"/services"}
-            className={
-              pathname.includes("/services") ? activeLink : inactiveLink
-            }
-          >
-            Найти услуги
-          </Link>
-          <Link
-            href={"/stages"}
-            className={
-              pathname.includes("/stages") ? activeLink : inactiveLink
-            }
-          >
-            Этапы работы
-          </Link>
-          <Link
-            href={"/partners"}
-            className={
-              pathname.includes("/partners") ? activeLink : inactiveLink
-            }
-          >
-            Партнеры
-          </Link>
-          <Link
-            href={"/faq"}
-            className={
-              pathname.includes("/faq") ? activeLink : inactiveLink
-            }
-          >
-            Часто задаваемые вопросы
-          </Link>
-          <Link
-            href={"/price"}
-            className={
-              pathname.includes("/price") ? activeLink : inactiveLink
-            }
-          >
-            Раздел цены
-          </Link>
-          <Link
-            href={"/portfolio"}
-            className={
-              pathname.includes("/portfolio") ? activeLink : inactiveLink
-            }
-          >
-            Раздел портфолио
-          </Link>
-          <Link
-            href={"/footer"}
-            className={
-              pathname.includes("/footer") ? activeLink : inactiveLink
-            }
-          >
-            Футер
+            Товары
           </Link>
           <hr />
           <button onClick={logout} className={inactiveLink}>

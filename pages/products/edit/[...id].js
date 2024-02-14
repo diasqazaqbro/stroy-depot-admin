@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import PortfolioEdit from "@/components/PortfolioEdit";
+import PortfolioEdit from "@/components/ProductEdit";
 
 export default function EditProductPage() {
   const [productInfo, setProductInfo] = useState(null);
@@ -12,7 +12,7 @@ export default function EditProductPage() {
     if (!id) {
       return;
     }
-    axios.get('/api/portfolio?id='+id).then(response => {
+    axios.get('/api/products?id='+id).then(response => {
       setProductInfo(response.data);
     });
   }, [id]);

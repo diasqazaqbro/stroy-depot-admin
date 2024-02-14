@@ -3,7 +3,7 @@ import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-export default function DeletePortfolioPage() {
+export default function DeleteProductsPage() {
   const router = useRouter();
   const [productInfo,setProductInfo] = useState();
   const {id} = router.query;
@@ -11,15 +11,15 @@ export default function DeletePortfolioPage() {
     if (!id) {
       return;
     }
-    axios.get('/api/portfolio?id='+id).then(response => {
+    axios.get('/api/products?id='+id).then(response => {
       setProductInfo(response.data);
     });
   }, [id]);
   function goBack() {
-    router.push('/portfolio');
+    router.push('/products');
   }
   async function deleteProduct() {
-    await axios.delete('/api/portfolio?id='+id);
+    await axios.delete('/api/products?id='+id);
     goBack();
   }
   return (

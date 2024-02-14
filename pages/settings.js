@@ -2,57 +2,34 @@ import Layout from "@/components/Layout";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function Settings({}) {
+export default function Settings() {
+  const [data, setData] = useState({});
+  const [showAlert, setShowAlert] = useState(false);
+
   useEffect(() => {
-    axios.get("/api/settings").then((response) => {
-      setNumber(response.data[0].number);
+    axios.get("/api/settings/").then((response) => {
+      setData(response.data[0]);
     });
-    axios
-      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=19")
-      .then((response) => {
-        setImagesOne(response.data.results.path);
-      });
   }, []);
 
-  const [number, setNumber] = useState();
-  const [imagesOne, setImagesOne] = useState();
-  const [fileOne, setFileOne] = useState(null);
-  const [showAlert, setShowAlert] = useState(false);
-  async function saveProduct(ev) {
-    ev.preventDefault()
-    const data = {
-      number
-    };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const saveProduct = async (ev) => {
+    ev.preventDefault();
     await axios.put("/api/settings", data);
-
-    const formDataOne = new FormData();
-    formDataOne.append("id", "19");
-    formDataOne.append("image", fileOne);
-
-    await axios.put(
-      "https://timkaqwerty.pythonanywhere.com/hds/img/",
-      formDataOne,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-    axios.get("/api/settings").then((response) => {
-      setNumber(response.data[0].number);
-    });
-    axios
-      .get("https://timkaqwerty.pythonanywhere.com/hds/img/?id=19")
-      .then((response) => {
-        setImagesOne(response.data.results.path);
-      });
     setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 3000);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
-      setTimeout(() => {
-        setShowAlert(false);
-      }, 3000);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
   return (
     <Layout>
       {showAlert && (
@@ -62,21 +39,64 @@ export default function Settings({}) {
       )}
       <h1 className="my-4">Настройка содержимого сайта</h1>
       <form onSubmit={saveProduct}>
-        <label>Тут введите активный номер</label>
-        <input
-          type="text"
-          placeholder="Номер"
-          value={number}
-          onChange={(ev) => setNumber(ev.target.value)}
-        />
-        <label>Логотип</label>
-        <input
-          type="file"
-          onChange={(event) => {
-            setFileOne(event.target.files[0]);
-          }}
-        /> 
-        <img src={imagesOne} style={{ width: '400px', height: '400px'}} />
+        <div className="form-group">
+          <label htmlFor="phoneNumber">Телефонный номер</label>
+          <input
+            type="text"
+            id="phoneNumber"
+            name="phoneNumber"
+            className="form-control"
+            value={data.phoneNumber || ""}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="address">Адрес</label>
+          <input
+            type="text"
+            id="address"
+            name="address"
+            className="form-control"
+            value={data.address || ""}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="suptitle">Подзаголовок</label>
+          <input
+            type="text"
+            id="suptitle"
+            name="suptitle"
+            className="form-control"
+            value={data.suptitle || ""}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="title">Заголовок</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            className="form-control"
+            value={data.title || ""}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="workTime">Режим работы</label>
+          <input
+            type="text"
+            id="workTime"
+            name="workTime"
+            className="form-control"
+            value={data.workTime || ""}
+            onChange={handleChange}
+          />
+        </div>
+
         <button type="submit" className="btn-primary my-3">
           Сохранить
         </button>
