@@ -14,7 +14,7 @@ export default function Products() {
   return (
     <Layout>
       <Link className="btn-primary" href={"/products/new"}>
-        Добавить портфолио
+        Добавить товар
       </Link>
       <table className="basic mt-2">
         <thead>
