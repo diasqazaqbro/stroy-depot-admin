@@ -31,20 +31,6 @@ export default async function handle(req, res) {
     }
   }
 
-  if (method === "POST") {
-    const { code, description, image, price, title } = req.body;
-    const productsCollection = collection(db, "products");
-    const updatedData = {
-      code: code,
-      description: description,
-      price: price,
-      title: title,
-      image: image,
-    };
-    await addDoc(productsCollection, updatedData);
-    res.json(true);
-  }
-
   if (method === "PUT") {
     const { code, id, description, image, price, title } = req.body;
     const productsDocRef = doc(db, "products", id);

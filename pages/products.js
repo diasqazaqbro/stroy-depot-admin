@@ -11,6 +11,40 @@ export default function Products() {
       setProducts(response.data);
     });
   }, []);
+
+  const getCategory = (id) => {
+   
+    let response = ''
+          switch (id) {
+            case '1':
+              response = 'Полиуретановые пены'
+              break;
+            case '2':
+              response = 'Пено клей'
+              break;
+            case '3':
+              response = 'Силиконовые герметики'
+              break;
+            case '4':
+              response = 'Монтажные клей'
+              break;
+            case '5':
+              response = 'Краски аэрозольные'
+              break;
+            case '6':
+              response = 'Затирка для швов'
+              break;
+            case '7':
+              response = 'Обойные клей'
+              break;
+            case '8':
+              response = 'Разное'
+              break;
+            default:
+              break;
+          }
+          return response
+  }
   return (
     <Layout>
       <Link className="btn-primary" href={"/products/new"}>
@@ -19,6 +53,7 @@ export default function Products() {
       <table className="basic mt-2">
         <thead>
           <tr>
+            <td>Категория</td>
             <td>Имя товара</td>
             <td>Описание</td>
             <td>Цена</td>
@@ -27,6 +62,7 @@ export default function Products() {
         <tbody>
           {products.map((item) => (
             <tr key={item.id}>
+              <td>{getCategory(item.category)}</td>
               <td>{item.title}</td>
               <td>{item.description}</td>
               <td>{item.price}</td>
