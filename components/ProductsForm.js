@@ -27,15 +27,15 @@ export default function ProductForm() {
       const productsCollection = collection(db, "products");
       const currentDate = new Date();
 
-      const storageRef = ref(storage, `products/${title}`);
-      await uploadBytes(storageRef, file);
-      const photoURL = await getDownloadURL(storageRef);
+      // const storageRef = ref(storage, `products/${title}`);
+      // await uploadBytes(storageRef, file);
+      // const photoURL = await getDownloadURL(storageRef);
       const updatedData = {
         code: code,
         description: editorRef.current.getContent(),
         price: price,
         title: title,
-        image: photoURL,
+        image: file,
         time_posted: currentDate,
         importasntProducts: isChecked,
         category: selectedCategory,
@@ -96,6 +96,13 @@ export default function ProductForm() {
           value={title}
           onChange={(ev) => setTitle(ev.target.value)}
         />
+        <label>ФОТКА ВРЕМЕННО</label>
+        <input
+          type="text"
+          placeholder="ФОТКА ВРЕМЕННО"
+          value={title}
+          onChange={(ev) => setFile(ev.target.value)}
+        />
         <label htmlFor="category">Категория:</label>
         <select
           id="category"
@@ -113,10 +120,10 @@ export default function ProductForm() {
           <option value={7}>Обойные клей</option>
           <option value={8}>Разное</option>
         </select>
-        <label>Поставить код проект</label>
+        <label>Краткое описание</label>
         <input
           type="text"
-          placeholder="Поставить код проект"
+          placeholder="Краткое описание"
           value={code}
           onChange={(ev) => setCode(ev.target.value)}
         />

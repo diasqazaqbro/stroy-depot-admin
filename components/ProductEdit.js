@@ -11,6 +11,7 @@ export default function ProductEdit({ id }) {
   useEffect(() => {
     axios.get(`/api/products?id=${id}`).then((response) => {
       setData(response.data);
+      console.log(response.data);
     });
   }, [id]);
   const [data, setData] = useState({});
@@ -33,17 +34,31 @@ export default function ProductEdit({ id }) {
       const storageRef = ref(storage, `products/${title}`);
       await uploadBytes(storageRef, file);
       const photoURL = await getDownloadURL(storageRef);
-      const postData = {
-        code: data.code,
-        description: editorRef.current.getContent(),
-        price: data.price,
-        title: data.title,
-        image: photoURL,
-        importantProducts: isChecked,
-        category: data.category,
-      };
-      await axios.put("/api/products", { ...postData, id });
-      setGoToProducts(true);
+      if (file) {
+        const postData = {
+          code: data.code,
+          description: editorRef.current.getContent(),
+          price: data.price,
+          title: data.title,
+          image: photoURL,
+          importantProducts: isChecked,
+          category: data.category,
+        };
+        await axios.put("/api/products", { ...postData, id });
+        setGoToProducts(true);
+      } else { 
+        const postData = {
+          code: data.code,
+          description: editorRef.current.getContent(),
+          price: data.price,
+          title: data.title,
+          image: photoURL,
+          importantProducts: isChecked,
+          category: data.category,
+        };
+        await axios.put("/api/products", { ...postData, id });
+        setGoToProducts(true);
+      }
     }
   }
 
@@ -114,7 +129,7 @@ export default function ProductEdit({ id }) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="code">Код продукта</label>
+          <label htmlFor="code">Краткое описание</label>
           <input
             type="text"
             id="code"
