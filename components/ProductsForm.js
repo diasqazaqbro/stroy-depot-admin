@@ -19,10 +19,10 @@ export default function ProductForm() {
   async function saveProduct(ev) {
     if (editorRef.current) {
       ev.preventDefault();
-      if (!file) {
-        alert("Загрузите фотку");
-        return;
-      }
+      // if (!file) {
+      //   alert("Загрузите фотку");
+      //   return;
+      // }
 
       const productsCollection = collection(db, "products");
       const currentDate = new Date();
@@ -100,7 +100,7 @@ export default function ProductForm() {
         <input
           type="text"
           placeholder="ФОТКА ВРЕМЕННО"
-          value={title}
+          value={file}
           onChange={(ev) => setFile(ev.target.value)}
         />
         <label htmlFor="category">Категория:</label>
