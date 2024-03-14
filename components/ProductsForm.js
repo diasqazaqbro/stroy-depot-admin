@@ -19,23 +19,23 @@ export default function ProductForm() {
   async function saveProduct(ev) {
     if (editorRef.current) {
       ev.preventDefault();
-      // if (!file) {
-      //   alert("Загрузите фотку");
-      //   return;
-      // }
+      if (!file) {
+        alert("Загрузите фотку");
+        return;
+      }
 
       const productsCollection = collection(db, "products");
       const currentDate = new Date();
 
-      // const storageRef = ref(storage, `products/${title}`);
-      // await uploadBytes(storageRef, file);
-      // const photoURL = await getDownloadURL(storageRef);
+      const storageRef = ref(storage, `products/${title}`);
+      await uploadBytes(storageRef, file);
+      const photoURL = await getDownloadURL(storageRef);
       const updatedData = {
         code: code,
         description: editorRef.current.getContent(),
         price: price,
         title: title,
-        image: file,
+        image: photoURL,
         time_posted: currentDate,
         importasntProducts: isChecked,
         category: selectedCategory,
@@ -95,13 +95,6 @@ export default function ProductForm() {
           placeholder="Заголовок"
           value={title}
           onChange={(ev) => setTitle(ev.target.value)}
-        />
-        <label>ФОТКА ВРЕМЕННО</label>
-        <input
-          type="text"
-          placeholder="ФОТКА ВРЕМЕННО"
-          value={file}
-          onChange={(ev) => setFile(ev.target.value)}
         />
         <label htmlFor="category">Категория:</label>
         <select
